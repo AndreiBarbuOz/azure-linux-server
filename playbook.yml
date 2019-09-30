@@ -1,0 +1,33 @@
+--- 
+- 
+  hosts: linux-server-wb.southeastasia.cloudapp.azure.com
+  remote_user: uipath
+  tasks:
+  - name: apt-get update 
+    apt: 
+      update_cache: yes
+    become: yes
+    become_method: sudo
+  - name: apt-get upgrade 
+    apt: 
+      name: '*'
+      state: latest
+    become: yes
+    become_method: sudo
+  - name: get nodejs apt keys
+    shell: curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+  - name: apt-get install nodejs
+    apt: 
+      name: nodejs
+      state: present
+      update_cache: yes
+    become: yes
+    become_method: sudo
+  - name: install node-red
+    npm:
+      name: node-red
+      global: yes
+      unsafe_perm: yes
+    become: yes
+    become_method: sudo
+
