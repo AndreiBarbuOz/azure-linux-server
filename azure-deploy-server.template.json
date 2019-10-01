@@ -4,6 +4,7 @@
     "parameters": {
         "projectName": {
             "type": "string",
+            "defaultValue": "linux-server",
             "metadata": {
                 "description": "Specifies a name for generating resource names."
             }
@@ -17,7 +18,7 @@
         },
         "vmSize": {
             "type": "string",
-            "defaultValue": "Standard_B1s",
+            "defaultValue": "Standard_B2ms",
             "metadata": {
                 "description": "VM size for Server."
             }
@@ -123,6 +124,20 @@
                             "destinationAddressPrefix": "*",
                             "access": "Allow",
                             "priority": 1004,
+                            "direction": "Inbound"
+                        }
+                    },
+                    {
+                        "name": "stanford-nlp",
+                        "properties": {
+                            "description": "Allow inbound stanford NLP traffic",
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "9000",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1005,
                             "direction": "Inbound"
                         }
                     }

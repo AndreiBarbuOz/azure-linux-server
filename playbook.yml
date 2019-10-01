@@ -14,5 +14,12 @@
       state: latest
     become: yes
     become_method: sudo
+  - name: apt-get install unzip
+    apt: 
+      name: unzip
+      state: present
+      update_cache: yes
+    become: yes
+    become_method: sudo
   - import_tasks: 'node-red/node-red.yml'
-#  - import_tasks: 'stanford-nlp/stanford.yml'
+  - import_tasks: 'stanford-nlp/stanford.yml'

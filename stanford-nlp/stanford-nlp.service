@@ -1,18 +1,18 @@
 [Unit]
-Description=Node-RED
+Description=Stanford-NLP
 After=syslog.target network.target
 
 [Service]
-ExecStart=/usr/bin/node-red --max-old-space-size=128 -v --settings /etc/node-red-settings.js
+ExecStart=/usr/bin/java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 15000
 Restart=on-failure
 KillSignal=SIGINT
 
 # log output to syslog as 'node-red'
-SyslogIdentifier=node-red
+SyslogIdentifier=stanford-nlp
 StandardOutput=syslog
 
 # non-root user to run as
-WorkingDirectory=/home/uipath/
+WorkingDirectory=/opt/stanford-corenlp-full-2018-10-05
 User=uipath
 Group=uipath
 

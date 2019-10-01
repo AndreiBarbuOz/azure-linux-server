@@ -1,10 +1,34 @@
-  - name: install java
-    apt: 
-      name: default-jre
-    become: yes
-    become_method: sudo
-  - name: download Stanford NLP zip
-    get_url:
-      url: http://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip
-      dest: /tmp/stanford-corenlp-full-2018-10-05.zip
-      owner: uipath
+---
+- name: install java
+  apt: 
+    name: default-jre
+  become: yes
+  become_method: sudo
+#- name: download Stanford NLP zip
+#  get_url:
+#    url: http://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip
+#    dest: /tmp/stanford-corenlp-full-2018-10-05.zip
+#    owner: uipath
+#
+- name: download and unarchive Stanford NLP
+  unarchive:
+    src: http://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip
+    dest: /opt/
+    remote_src: yes
+    owner: uipath
+  become: yes
+  become_method: sudo
+- name: stanford-nlp service file
+  copy:
+    src: stanford-nlp/stanford-nlp.service
+    dest: /etc/systemd/system/stanford-nlp.service
+  become: yes
+  become_method: sudo
+- name: stanford-nlp service
+  systemd:
+    state: started
+    enabled: yes
+    name: stanford-nlp
+  become: yes
+  become_method: sudo
+
