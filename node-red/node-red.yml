@@ -20,3 +20,16 @@
       dest: /etc/node-red-settings.js
     become: yes
     become_method: sudo
+  - name: node-red service file
+    copy:
+      src: node-red/node-red.service
+      dest: /etc/systemd/system/node-red.service
+    become: yes
+    become_method: sudo
+  - name: node-red service
+    systemd:
+      state: started
+      enabled: yes
+      name: node-red
+    become: yes
+    become_method: sudo

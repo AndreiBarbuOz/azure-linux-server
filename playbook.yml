@@ -14,5 +14,5 @@
       state: latest
     become: yes
     become_method: sudo
-#  - import_tasks: 'node-red/node-red.yml'
-  - import_tasks: 'stanford-nlp/stanford.yml'
+  - import_tasks: 'node-red/node-red.yml'
+#  - import_tasks: 'stanford-nlp/stanford.yml'
