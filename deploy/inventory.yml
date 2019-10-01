@@ -1,0 +1,3 @@
+all:
+    hosts:
+        linux-server-wb.southeastasia.cloudapp.azure.com:

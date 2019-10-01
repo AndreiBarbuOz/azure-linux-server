@@ -1,0 +1,22 @@
+  - name: get nodejs apt keys
+    shell: curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+  - name: apt-get install nodejs
+    apt: 
+      name: nodejs
+      state: present
+      update_cache: yes
+    become: yes
+    become_method: sudo
+  - name: install node-red
+    npm:
+      name: node-red
+      global: yes
+      unsafe_perm: yes
+    become: yes
+    become_method: sudo
+  - name: node-red settings file
+    copy: 
+      src: node-red/settings.js
+      dest: /etc/node-red-settings.js
+    become: yes
+    become_method: sudo

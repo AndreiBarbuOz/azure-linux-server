@@ -1,0 +1,10 @@
+  - name: install java
+    apt: 
+      name: default-jre
+    become: yes
+    become_method: sudo
+  - name: download Stanford NLP zip
+    get_url:
+      url: http://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip
+      dest: /tmp/stanford-corenlp-full-2018-10-05.zip
+      owner: uipath
